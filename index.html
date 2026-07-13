@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michal's InGame Mods — FS25</title>
+<meta name="description" content="Free FS25 script mod: no speed limits, absurd trailer capacities, 1156 hp big tractors. One zip, all config in one Lua file.">
+<style>
+  :root{
+    --soil:#151a11;
+    --panel:#1e2618;
+    --panel2:#242e1d;
+    --line:#39442e;
+    --grain:#ece6d3;
+    --muted:#98a086;
+    --wheat:#e8a33d;
+    --field:#7cb84a;
+    --mono:ui-monospace,"Cascadia Code","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--soil);
+    color:var(--grain);
+    font-family:var(--sans);
+    line-height:1.6;
+    font-size:17px;
+  }
+  a{color:var(--wheat)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+  /* header strip */
+  .strip{
+    border-bottom:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+    padding:10px 0;
+  }
+  .strip .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .strip-right{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+  .gh-link{display:inline-flex;color:var(--muted);line-height:0;transition:color .15s ease}
+  .gh-link:hover{color:var(--wheat)}
+  .gh-link svg{width:22px;height:22px;display:block;fill:currentColor}
+
+  /* hero */
+  header.hero{padding:72px 0 48px;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--field);margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(2.4rem,7vw,4.2rem);
+    line-height:1.02;
+    font-weight:900;
+    letter-spacing:-.02em;
+    margin-bottom:20px;
+  }
+  h1 .thin{color:var(--muted);font-weight:300}
+  .lede{font-size:1.15rem;max-width:56ch;color:var(--grain)}
+  .lede em{color:var(--wheat);font-style:normal}
+  .hero-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-block;background:var(--wheat);color:#1c1607;
+    font-weight:700;text-decoration:none;padding:13px 26px;
+    border:2px solid var(--wheat);
+  }
+  .btn:hover{background:transparent;color:var(--wheat)}
+  .btn:focus-visible,a:focus-visible{outline:3px solid var(--field);outline-offset:3px}
+  .vertag{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+  /* spec cards */
+  .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:56px 0}
+  .spec{background:var(--panel);padding:26px 22px}
+  .spec .num{
+    font-family:var(--mono);font-size:clamp(1.6rem,4vw,2.3rem);
+    font-weight:700;color:var(--wheat);display:block;line-height:1.1;
+  }
+  .spec .unit{font-size:.55em;color:var(--muted);font-weight:400}
+  .spec p{font-size:.92rem;color:var(--muted);margin-top:8px}
+  @media (max-width:640px){.specs{grid-template-columns:1fr}}
+
+  section{padding:52px 0;border-bottom:1px solid var(--line)}
+  h2{
+    font-size:1.6rem;font-weight:800;margin-bottom:6px;
+  }
+  h2::before{
+    content:"■ ";color:var(--field);font-size:.7em;vertical-align:.15em;
+  }
+  .sub{color:var(--muted);margin-bottom:26px;max-width:60ch}
+  h3{font-size:1.05rem;margin:26px 0 8px;color:var(--wheat)}
+  p{max-width:66ch;margin-bottom:14px}
+  p:last-child{margin-bottom:0}
+
+  /* the log — signature element */
+  .log{
+    background:#0e120b;border:1px solid var(--line);
+    font-family:var(--mono);font-size:13px;line-height:1.75;
+    padding:20px 22px;overflow-x:auto;margin:20px 0 8px;
+  }
+  .log .t{color:#5c6650}
+  .log .ok{color:var(--field)}
+  .log .val{color:var(--wheat)}
+  .caption{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+  pre.code{
+    background:#0e120b;border:1px solid var(--line);
+    font-family:var(--mono);font-size:13.5px;line-height:1.7;
+    padding:20px 22px;overflow-x:auto;margin:14px 0;
+    color:var(--grain);
+  }
+  pre.code .c{color:#6d7860}
+  pre.code .k{color:var(--field)}
+  pre.code .v{color:var(--wheat)}
+  code{
+    font-family:var(--mono);font-size:.9em;
+    background:var(--panel2);padding:2px 6px;border:1px solid var(--line);
+  }
+
+  ol.steps{counter-reset:s;list-style:none;margin:18px 0;max-width:66ch}
+  ol.steps li{
+    counter-increment:s;position:relative;
+    padding:14px 0 14px 58px;border-top:1px solid var(--line);
+  }
+  ol.steps li:last-child{border-bottom:1px solid var(--line)}
+  ol.steps li::before{
+    content:counter(s,decimal-leading-zero);
+    position:absolute;left:0;top:14px;
+    font-family:var(--mono);font-weight:700;color:var(--field);
+  }
+
+  .quirk{border-left:3px solid var(--wheat);padding:4px 0 4px 18px;margin:18px 0}
+  .quirk b{color:var(--wheat)}
+
+  footer{padding:44px 0 64px;font-size:.92rem;color:var(--muted)}
+  footer .sig{font-family:var(--mono);font-size:12px;margin-top:14px}
+  footer .credit{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+  footer .credit a{color:var(--wheat)}
+</style>
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>FS25_MichalsInGameMods.zip</span>
+  <span class="strip-right">
+    <span>game 1.20+ · singleplayer · free</span>
+    <a class="gh-link" href="https://github.com/MichalAFerber/Modding-in-FS25" target="_blank" rel="noopener noreferrer" aria-label="View this project on GitHub (opens in a new tab)" title="View this project on GitHub">
+      <svg viewBox="0 0 16 16" width="22" height="22" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+  </span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Farming Simulator 25 · script mod</p>
+  <h1>Michal's<br>InGame Mods<span class="thin">.</span></h1>
+  <p class="lede">One zip that removes every speed limit, gives your trailers <em>940,000 liters</em> of capacity, and puts <em>1156 hp</em> in every big tractor. No XML surgery on the base game, no per-vehicle mod soup. One Lua file holds all the config.</p>
+  <div class="hero-cta">
+    <a class="btn" href="FS25_MichalsInGameMods.zip" download>Download the zip</a>
+    <span class="vertag">v1.1.0.0 · ~50 KB · works with base game + mod vehicles</span>
+  </div>
+</div></header>
+
+<div class="wrap">
+<div class="specs">
+  <div class="spec">
+    <span class="num">∞ <span class="unit">km/h working</span></span>
+    <p>Tool and implement speed limits gone. Seed at 60. Cruise cap raised to 200, factory top speed doubled.</p>
+  </div>
+  <div class="spec">
+    <span class="num">940,000 <span class="unit">L</span></span>
+    <p>Grain trailers and loading wagons hold a silo. Fill weight optionally ignored so physics survives.</p>
+  </div>
+  <div class="spec">
+    <span class="num">1,156 <span class="unit">hp</span></span>
+    <p>Every large tractor from John Deere, Case IH, CLAAS, and Fendt — plus the VNX 300 and Mack Anthem.</p>
+  </div>
+</div>
+</div>
+
+<section><div class="wrap">
+  <h2>Proof, not promises</h2>
+  <p class="sub">This mod logs everything it touches. Straight out of my log.txt — before and after values, per vehicle, every load:</p>
+  <div class="log">
+<span class="t">00:48:24.577</span> <span class="ok">MIGM:</span> volvo/vnx300.xml -&gt; 1156 hp (<span class="val">368 kW -&gt; 850 kW</span>, scale 2.31)<br>
+<span class="t">00:48:25.919</span> <span class="ok">MIGM:</span> krampe/sks30_150.xml -&gt; 940000 l (<span class="val">was 59400 l</span>)<br>
+<span class="t">00:48:26.592</span> <span class="ok">MIGM:</span> claas/xerion12.xml -&gt; 1156 hp (<span class="val">481 kW -&gt; 850 kW</span>, scale 1.77)<br>
+<span class="t">00:48:26.765</span> <span class="ok">MIGM:</span> johnDeere/series9RX830.xml -&gt; 1156 hp (<span class="val">672 kW -&gt; 850 kW</span>, scale 1.27)<br>
+<span class="t">00:48:28.088</span> <span class="ok">MIGM:</span> rudolphSohn/tdk301RP.xml -&gt; 60000 l (<span class="val">was 18500 l</span>)<br>
+<span class="t">00:48:28.209</span> <span class="ok">MIGM:</span> wilsonPacesetterByStevie/pacesetter.xml -&gt; 940000 l (<span class="val">was 240000 l</span>)
+  </div>
+  <p class="caption">If a vehicle got patched, there's a line for it. If there's no line, it didn't. Grep and know.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What it actually does</h2>
+
+  <h3>No speed limit</h3>
+  <p>Every working-speed clamp in the game funnels through one function — <code>Vehicle.getSpeedLimit</code>. This mod overrides it to return "no limit." Cultivators, seeders, sprayers, balers, cutters: all of them work at whatever speed you're doing. Damage-based speed reduction dies with it. Factory top speed gets a 2x multiplier and cruise control won't re-cap you until 200 km/h.</p>
+
+  <h3>Max capacity</h3>
+  <p>A pattern table matches vehicles by their config path and rewrites fill unit capacity on load. Works on base game vehicles and mod vehicles the same way. Fill mass is ignored by default — because 940,000 liters of wheat is roughly 730 tons and the physics engine has opinions about that.</p>
+
+  <h3>Max horsepower</h3>
+  <p>Torque gets scaled at the source — an override on <code>VehicleMotor.getTorqueCurveValue</code> — so it works no matter how GIANTS stores the curve internally. Big tractors are matched by shop category + brand, so every current and future large tractor from the four brands gets the treatment automatically. Heads up: the shop page still shows factory horsepower because it reads cached store data. The tractor pulls 1156. The brochure lies.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Install</h2>
+  <ol class="steps">
+    <li>Drop <code>FS25_MichalsInGameMods.zip</code> into your mods folder — <code>Documents\My Games\FarmingSimulator2025\mods\</code> (or wherever your custom mod directory points). Don't extract it. Don't rename it — the filename is the mod name and GIANTS rejects dots and version suffixes.</li>
+    <li>Enable it when loading your savegame.</li>
+    <li>Optional: grep <code>log.txt</code> for <code>MIGM:</code> to see exactly what got patched.</li>
+  </ol>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Make it yours</h2>
+  <p class="sub">Everything lives at the top of <code>scripts/MichalsInGameMods.lua</code> inside the zip. Change values, re-zip, done.</p>
+  <pre class="code"><span class="k">MIGM.TOP_SPEED_MULTIPLIER</span> = <span class="v">2.0</span>   <span class="c">-- physics gets comedic above ~3.0</span>
+<span class="k">MIGM.CRUISE_MAX_KMH</span>       = <span class="v">200</span>
+
+<span class="k">MIGM.CAPACITY</span> = {
+    [<span class="v">"pacesetter"</span>] = <span class="v">940000</span>,   <span class="c">-- match by config-path substring</span>
+    [<span class="v">"tdk301"</span>]     = <span class="v">60000</span>,    <span class="c">-- add your own trailers here</span>
+}
+<span class="k">MIGM.IGNORE_FILL_MASS</span> = <span class="v">true</span>    <span class="c">-- false = realistic 730-ton comedy</span>
+
+<span class="k">MIGM.BIG_TRACTOR_HP</span> = <span class="v">1156</span>
+<span class="k">MIGM.BIG_TRACTOR_BRANDS</span> = { JOHNDEERE=<span class="v">true</span>, CASEIH=<span class="v">true</span>, CLAAS=<span class="v">true</span>, FENDT=<span class="v">true</span> }</pre>
+  <p>Not sure what a vehicle's config path looks like? Set <code>MIGM.DEBUG = true</code>, load in, and every vehicle prints its exact path to the log. Copy the distinctive part into the table. That's the whole workflow.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Known quirks — read before you complain</h2>
+  <div class="quirk"><b>Singleplayer only.</b> The mod declares <code>multiplayer supported="false"</code> and means it. The motor changes won't sync cleanly across clients.</div>
+  <div class="quirk"><b>Shop specs don't update.</b> Store pages read cached data. Judge by the seat of your pants or a HUD mod, not the brochure.</div>
+  <div class="quirk"><b>Unload speed is unchanged.</b> Tipping 940k liters at a sell point takes a while. That's the discharge rate, not the capacity.</div>
+  <div class="quirk"><b>Game patches can rename things.</b> If a GIANTS update breaks a hook, the log will tell you exactly where. That's on purpose.</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Free. Do whatever you want with it — edit it, redistribute it, learn from it. No warranty, no support contract, no crying if your tractor achieves orbit on a field bump. That's a feature.</p>
+  <p class="sig">built by TechGuyWithABeard · debugged the honest way: two log files at a time</p>
+  <p class="credit">© 2026 | Created with ❤️ by <a href="https://michalferber.dev" target="_blank" rel="noopener noreferrer">Michal Ferber</a>, aka <a href="https://techguywithabeard.com" target="_blank" rel="noopener noreferrer">TechGuyWithABeard</a></p>
+</div></footer>
+
+</body>
+</html>
