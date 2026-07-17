@@ -19,21 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
--------------------------------------------------------------------------------
-Third-party notices
--------------------------------------------------------------------------------
-
-This project bundles the following component, under its own license:
-
-- JetBrains Mono (variable, latin subset), version 5.2.8 as packaged by
-  Fontsource (@fontsource-variable/jetbrains-mono).
-  Copyright 2020 The JetBrains Mono Project Authors
-  (https://github.com/JetBrains/JetBrainsMono).
-  Licensed under the SIL Open Font License, Version 1.1.
-  Full license text: fonts/JetBrainsMono-OFL.txt
-
-The site also loads a self-hosted Plausible Analytics script at runtime
-(plausible.thompsonblack.us). Plausible is a separate, externally hosted
-service and is not bundled in this repository; it is licensed by its authors
-under the GNU AGPL v3.
