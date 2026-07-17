@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Michal's InGame Mods">
+  <rect width="64" height="64" rx="14" fill="#1e2618"/>
+  <rect x="7" y="46" width="50" height="3.2" rx="1.6" fill="#7cb84a" opacity=".55"/>
+  <rect x="19.5" y="14" width="4.5" height="13" rx="2.25" fill="#e8a33d"/>
+  <path d="M16 28h14l3-8h9a3 3 0 0 1 3 3v10h5a3 3 0 0 1 3 3v3H14a3 3 0 0 1-3-3v-7a4 4 0 0 1 4-4z" fill="#e8a33d"/>
+  <path d="M34 21.5h6.4a1.8 1.8 0 0 1 1.8 1.8V29H34z" fill="#1e2618" opacity=".9"/>
+  <circle cx="23" cy="45" r="12" fill="#20281a" stroke="#e8a33d" stroke-width="4.2"/>
+  <circle cx="23" cy="45" r="3.8" fill="#7cb84a"/>
+  <circle cx="47.5" cy="47" r="8" fill="#20281a" stroke="#e8a33d" stroke-width="3.6"/>
+  <circle cx="47.5" cy="47" r="2.6" fill="#7cb84a"/>
+</svg>
