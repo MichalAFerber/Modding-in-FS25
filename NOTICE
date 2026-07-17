@@ -1,0 +1,24 @@
+THIRD-PARTY NOTICES
+===================
+
+Michal's InGame Mods (this repository) is licensed under the MIT License; see
+LICENSE. It bundles or references the third-party components below, each under
+its own license.
+
+1. JetBrains Mono (variable, latin subset)
+   Version:   5.2.8, as packaged by Fontsource
+              (@fontsource-variable/jetbrains-mono)
+   Copyright: 2020 The JetBrains Mono Project Authors
+              (https://github.com/JetBrains/JetBrainsMono)
+   License:   SIL Open Font License, Version 1.1
+   Full text: fonts/JetBrainsMono-OFL.txt
+   Bundled:   fonts/jetbrains-mono-latin-variable.woff2
+
+2. Plausible Analytics
+   Loaded at runtime from a self-hosted instance (plausible.thompsonblack.us).
+   Not bundled in this repository.
+   License:   GNU Affero General Public License v3.0
+
+3. GitHub "Octocat" mark
+   Copyright: (c) GitHub, Inc.
+   Used as an inline SVG link to the project's GitHub repository.

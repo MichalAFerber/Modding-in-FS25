@@ -83,10 +83,10 @@ This is a **Class C micro-project** (FS25 mod) under the TGWAB Dev Standards, wh
 | [Plausible Analytics](https://plausible.io/) (self-hosted, loaded at runtime) | — | AGPL-3.0 |
 | GitHub Octocat mark | — | © GitHub, Inc. |
 
-The brand mark / favicon ([`favicon.svg`](favicon.svg)) was created for this project.
+The brand mark / favicon ([`favicon.svg`](favicon.svg)) was created for this project. Full third-party notices are in [`NOTICE`](NOTICE).
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE), which also carries the bundled-component notices. Do whatever you want with it: edit it, redistribute it, learn from it.
+MIT — see [`LICENSE`](LICENSE). Third-party component notices live in [`NOTICE`](NOTICE). Do whatever you want with it: edit it, redistribute it, learn from it.
 
 © 2026 | Created with ❤️ by [Michal Ferber](https://michalferber.dev/), aka [TechGuyWithABeard](https://techguywithabeard.com/).
