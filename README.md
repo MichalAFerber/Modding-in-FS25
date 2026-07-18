@@ -97,7 +97,7 @@ This is a **Class C micro-project** (FS25 mod) under the TGWAB Dev Standards, wh
 | [Plausible Analytics](https://plausible.io/) (self-hosted, loaded at runtime) | — | AGPL-3.0 |
 | GitHub Octocat mark | — | © GitHub, Inc. |
 
-The brand mark / favicon ([`favicon.svg`](favicon.svg)) was created for this project. Full third-party notices are in [`NOTICE`](NOTICE).
+The site favicon ([`favicon.png`](favicon.png)) is the mod's in-game icon, converted from [`mod/icon_michalsInGameMods.dds`](mod/icon_michalsInGameMods.dds). Full third-party notices are in [`NOTICE`](NOTICE).
 
 ## License
 
