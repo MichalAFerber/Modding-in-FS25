@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Tag to release as (e.g. v1.1.0.0) — the release creates the tag. Leave empty to just build the zip as a workflow artifact.'
+        description: 'Tag to release as (e.g. v1.20.0.0) — the release creates the tag. Leave empty to just build the zip as a workflow artifact.'
         required: false
         default: ''
 
