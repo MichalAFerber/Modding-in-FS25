@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Tag to release as (e.g. v1.1.0.0) — the release creates the tag. Leave empty to just build the zip as a workflow artifact.'
+        description: 'Tag to release as (e.g. v1.20.0.0) — the release creates the tag. Leave empty to just build the zip as a workflow artifact.'
         required: false
         default: ''
 
@@ -30,7 +30,8 @@ jobs:
           fi
 
       - name: Validate modDesc.xml
-        run: xmllint --noout mod/modDesc.xml
+        # python3 is preinstalled on GitHub runners; xmllint is not.
+        run: python3 -c "import xml.etree.ElementTree as ET; ET.parse('mod/modDesc.xml'); print('modDesc.xml is well-formed')"
 
       - name: Build mod zip (modDesc.xml at zip root)
         # GIANTS requires modDesc.xml at the root of the zip, and the zip

@@ -66,7 +66,7 @@ Both the mod and its website live here.
 The site's Download button always points at the **latest GitHub Release** asset. To ship a version:
 
 1. Bump `<version>` in [`mod/modDesc.xml`](mod/modDesc.xml) and merge to `main`.
-2. Tag it: `git tag v1.1.0.0 && git push origin v1.1.0.0` (tag must match the modDesc version — CI enforces it).
+2. Tag it: `git tag v1.20.0.0 && git push origin v1.20.0.0` (tag must match the modDesc version — CI enforces it). Or run the **Build & release mod** workflow with `release_tag: v1.20.0.0` — it creates the tag for you.
 3. [`build-mod.yml`](.github/workflows/build-mod.yml) validates `modDesc.xml`, zips `mod/` with `modDesc.xml` at the zip root, and attaches `FS25_MichalsInGameMods.zip` to the release. The download button picks it up automatically.
 
 A manual run (`workflow_dispatch`) builds the zip as a workflow artifact without releasing.
