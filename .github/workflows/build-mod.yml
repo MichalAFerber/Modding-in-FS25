@@ -4,6 +4,11 @@ on:
   push:
     tags: ['v*']
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Tag to release as (e.g. v1.1.0.0) — the release creates the tag. Leave empty to just build the zip as a workflow artifact.'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -14,6 +19,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve release tag
+        id: rel
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ inputs.release_tag }}" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Validate modDesc.xml
         run: xmllint --noout mod/modDesc.xml
@@ -29,24 +43,27 @@ jobs:
           unzip -p FS25_MichalsInGameMods.zip modDesc.xml > /dev/null
 
       - name: Check tag matches modDesc version
-        if: startsWith(github.ref, 'refs/tags/')
+        if: steps.rel.outputs.tag != ''
         run: |
           MODDESC_VERSION=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' mod/modDesc.xml)
-          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          TAG_VERSION="${RELEASE_TAG#v}"
           if [ "$MODDESC_VERSION" != "$TAG_VERSION" ]; then
-            echo "::error::Tag ${GITHUB_REF_NAME} does not match modDesc.xml version ${MODDESC_VERSION} — bump <version> or retag."
+            echo "::error::Tag ${RELEASE_TAG} does not match modDesc.xml version ${MODDESC_VERSION} — bump <version> or retag."
             exit 1
           fi
+        env:
+          RELEASE_TAG: ${{ steps.rel.outputs.tag }}
 
       - name: Publish release with zip asset
-        if: startsWith(github.ref, 'refs/tags/')
+        if: steps.rel.outputs.tag != ''
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.rel.outputs.tag }}
           files: FS25_MichalsInGameMods.zip
           generate_release_notes: true
 
-      - name: Upload zip as workflow artifact (non-tag runs)
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      - name: Upload zip as workflow artifact (build-only runs)
+        if: steps.rel.outputs.tag == ''
         uses: actions/upload-artifact@v4
         with:
           name: FS25_MichalsInGameMods
