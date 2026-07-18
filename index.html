@@ -192,7 +192,7 @@
   </div>
   <div class="spec">
     <span class="num">1,156 <span class="unit">hp</span></span>
-    <p>Every large tractor from John Deere, Case IH, CLAAS, and Fendt — plus the VNX 300 and Mack Anthem.</p>
+    <p>John Deere 9R and 9RX, Case IH Steiger, CLAAS XERION 12 — plus the Volvo VNX 300 and Mack Anthem.</p>
   </div>
 </div>
 </div>
@@ -221,7 +221,7 @@
   <p>A pattern table matches vehicles by their config path and rewrites fill unit capacity on load. Works on base game vehicles and mod vehicles the same way. Fill mass is ignored by default — because 940,000 liters of wheat is roughly 730 tons and the physics engine has opinions about that.</p>
 
   <h3>Max horsepower</h3>
-  <p>Torque gets scaled at the source — an override on <code>VehicleMotor.getTorqueCurveValue</code> — so it works no matter how GIANTS stores the curve internally. Big tractors are matched by shop category + brand, so every current and future large tractor from the four brands gets the treatment automatically. Heads up: the shop page still shows factory horsepower because it reads cached store data. The tractor pulls 1156. The brochure lies.</p>
+  <p>Torque gets scaled at the source — an override on <code>VehicleMotor.getTorqueCurveValue</code> — so it works no matter how GIANTS stores the curve internally. Rigs are matched by config-path substring with explicit per-vehicle overrides — John Deere 9R and 9RX, Case IH Steiger, CLAAS XERION 12, Volvo VNX 300, Mack Anthem — and adding another is one line in the table. Heads up: the shop page still shows factory horsepower because it reads cached store data. The tractor pulls 1156. The brochure lies.</p>
 </div></section>
 
 <section><div class="wrap">
