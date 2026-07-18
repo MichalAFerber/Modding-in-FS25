@@ -9,26 +9,12 @@ on:
         description: 'Tag to release as (e.g. v1.20.0.0) — the release creates the tag. Leave empty to just build the zip as a workflow artifact.'
         required: false
         default: ''
-      delete_tag:
-        description: 'TEMP: release tag to delete (release + git tag)'
-        required: false
-        default: ''
 
 permissions:
   contents: write
 
 jobs:
-  cleanup:
-    if: github.event_name == 'workflow_dispatch' && inputs.delete_tag != ''
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete release and its tag
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release delete "${{ inputs.delete_tag }}" --cleanup-tag --yes --repo "${{ github.repository }}"
-
   build:
-    if: inputs.delete_tag == ''
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
