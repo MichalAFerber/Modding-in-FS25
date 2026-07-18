@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="107">
+    <author>TechGuyWithABeard</author>
+    <version>1.1.0.0</version>
+    <title>
+        <en>Michals InGame Mods</en>
+    </title>
+    <description>
+        <en><![CDATA[Combined personal tweaks:
+- No Speed Limit: tools usable at any speed, top speed x2, cruise cap 200 km/h
+- Max Capacity: Wilson Pacesetter / Krampe SKS / Bergmann HTW 65 / Krone GX (940,000 l), Krone TX/ZX, Rapide 8400W (940,000 l), ABI 1600 / TDK 301 RA+RP (60,000 l)
+- Max Horsepower: JD 9RX + 9R, Case IH Steiger, CLAAS XERION 12, Volvo VNX 300, Mack Anthem 6x4 (1156 hp)
+
+All config in scripts/MichalsInGameMods.lua.]]></en>
+    </description>
+    <iconFilename>icon_michalsInGameMods.dds</iconFilename>
+    <multiplayer supported="false"/>
+    <extraSourceFiles>
+        <sourceFile filename="scripts/MichalsInGameMods.lua"/>
+    </extraSourceFiles>
+</modDesc>
