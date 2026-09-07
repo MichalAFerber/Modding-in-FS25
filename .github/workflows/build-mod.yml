@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Resolve release tag
         id: rel
@@ -57,7 +57,7 @@ jobs:
 
       - name: Publish release with zip asset
         if: steps.rel.outputs.tag != ''
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
           tag_name: ${{ steps.rel.outputs.tag }}
           files: FS25_MichalsInGameMods.zip
@@ -65,7 +65,7 @@ jobs:
 
       - name: Upload zip as workflow artifact (build-only runs)
         if: steps.rel.outputs.tag == ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: FS25_MichalsInGameMods
           path: FS25_MichalsInGameMods.zip
