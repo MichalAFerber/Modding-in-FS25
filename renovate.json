@@ -35,10 +35,12 @@
     "DIGEST-PINNING pr or merely a version bump. prConcurrentLimit and",
     "prHourlyLimit remain, so throttling does not depend on the schedule. If three",
     "repos prove noisy, add the schedule before going wider — that is the order",
-    "with evidence behind it."
+    "with evidence behind it.",
+    "The Dependency Dashboard is off. It is a status surface, not a task, and Renovate reopens the issue on every run. Queued updates still open PRs on their schedule."
   ],
   "extends": ["config:best-practices", ":semanticCommits"],
   "timezone": "America/New_York",
+  "dependencyDashboard": false,
   "prConcurrentLimit": 3,
   "prHourlyLimit": 2,
   "labels": ["dependencies"],
